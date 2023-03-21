@@ -20,6 +20,15 @@ class ApplicationController < Sinatra::Base
     task.to_json
   end
 
+  patch "/tasks/:id" do
+    task = Task.find(params[:id])
+    task.update(
+      description: params[:description],
+      high_priority: params[:high_priority]
+    )
+    task.to_json
+  end
+
   delete "/tasks/:id" do
     task = Task.find(params[:id])
     task.destroy
