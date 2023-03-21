@@ -35,4 +35,12 @@ class ApplicationController < Sinatra::Base
     task.to_json
   end
 
+  post "/categories" do
+    category = Category.create(
+      name: params[:name],
+      color: params[:color]
+    )
+    category.to_json
+  end
+
 end
