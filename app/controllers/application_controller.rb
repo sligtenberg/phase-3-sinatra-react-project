@@ -43,4 +43,10 @@ class ApplicationController < Sinatra::Base
     category.to_json
   end
 
+  delete "/categories/:id" do
+    category = Category.find(params[:id])
+    category.destroy
+    category.to_json
+  end
+
 end
