@@ -7,6 +7,10 @@ class ApplicationController < Sinatra::Base
     Category.all.to_json
   end
 
+  get "/categories/:id/tasks" do
+    Category.find(params[:id]).tasks.to_json
+  end
+
   get "/tasks" do
     Task.all.to_json
   end
