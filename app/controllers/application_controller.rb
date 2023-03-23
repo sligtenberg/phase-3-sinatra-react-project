@@ -8,18 +8,18 @@ class ApplicationController < Sinatra::Base
   #   Category.all.to_json
   # end
 
+  get "/" do
+    Category.all.to_json(only: [:id, :name, :color], include: {
+      tasks: { only: [:id, :description, :high_priority]}
+    })
+  end
+
   get "/categories" do
     categories = Category.all.to_json
   end
 
   get "/tasks" do
     Task.all.to_json
-  end
-
-  get "/" do
-    Category.all.to_json(only: [:id, :name, :color], include: {
-      tasks: { only: [:id, :description, :high_priority]}
-    })
   end
 
   post "/tasks" do
