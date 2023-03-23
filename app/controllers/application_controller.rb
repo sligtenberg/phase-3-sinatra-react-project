@@ -3,10 +3,10 @@ class ApplicationController < Sinatra::Base
   
   # Add your routes here
 
-  # # test route
-  # get "/categories" do
-  #   Category.all.to_json
-  # end
+  # test route
+  get "/task/say_hi" do
+    Task.first.say_hi.to_json
+  end
 
   get "/" do
     Category.all.to_json(only: [:id, :name, :color], include: {
