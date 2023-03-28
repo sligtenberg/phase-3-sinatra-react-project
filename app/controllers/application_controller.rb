@@ -4,36 +4,12 @@ class ApplicationController < Sinatra::Base
   # Add your routes here
 
   # test route
-  get "/task/say_hi" do
-    Task.first.say_hi.to_json
-  end
+  # get "/task/say_hi" do
+  #   Task.first.say_hi.to_json
+  # end
 
   get "/" do
     Category.all.to_json(only: [:id, :name, :color], include: {
-      tasks: { only: [:id, :description, :high_priority]}
-    })
-  end
-
-  get "/categories" do
-    Category.all.to_json
-  end
-
-  get "/tasks" do
-    Task.all.to_json
-  end
-
-  get "/categories/names" do
-    Category.all.pluck(:name).to_json
-  end
-
-  get "/categories/all" do
-    Category.all.to_json(only: [:id, :name, :color], include: {
-      tasks: { only: [:id, :description, :high_priority]}
-    })
-  end
-
-  get "/categories/:name" do
-    [Category.find_by(name: params[:name])].to_json(only: [:id, :name, :color], include: {
       tasks: { only: [:id, :description, :high_priority]}
     })
   end
@@ -66,14 +42,6 @@ class ApplicationController < Sinatra::Base
   post "/categories" do
     category = Category.create(
       name: params[:name],
-      color: params[:color]
-    )
-    category.to_json
-  end
-
-  patch "/categories/:id" do
-    category = Category.find(params[:id])
-    category.update(
       color: params[:color]
     )
     category.to_json
